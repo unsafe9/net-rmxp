@@ -7,6 +7,7 @@ task :extract_script do
     return unless STDIN.gets.chomp.downcase == "y"
   end
   RXDATA.extract_script(script_dir, script_data)
+  puts "Extracted script data."
 end
 
 task :compress_script do
@@ -14,6 +15,13 @@ task :compress_script do
   script_dir = "client/Scripts"
   script_data = "client/Data/Scripts.rxdata"
   RXDATA.compress_script(script_dir, script_data)
+  puts "Compressed script data."
+end
+
+task :test_play do
+  Rake::Task[:compress_script].execute
+  pid = Process.spawn("Game.exe", :chdir=>"client")
+  Process.waitpid(pid)
 end
 
 task :install_githooks do
@@ -29,4 +37,5 @@ task :install_githooks do
     exit 0
   HOOK
   )
+  puts "Installed pre-commit hook."
 end
