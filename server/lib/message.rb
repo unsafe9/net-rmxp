@@ -1,0 +1,3 @@
+module MSG
+  # test
+end

@@ -87,4 +87,5 @@ Scene_Shop
 Scene_Name
 Scene_Gameover
 Scene_Debug
+"Messages" -> "../../server/lib/message"
 Main
