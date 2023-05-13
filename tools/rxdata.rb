@@ -2,11 +2,10 @@ require "zlib"
 require "fileutils"
 
 module RXDATA
+
   def self.extract_script(outdir, rxdata)
     raise "File not found: #{rxdata}" unless File.exist? rxdata
-    if Dir.exist? outdir
-      FileUtils.remove_dir(outdir)
-    end
+    FileUtils.remove_dir(outdir) if Dir.exist? outdir
     Dir.mkdir(outdir)
 
     input = File.open(rxdata, "rb")
@@ -14,11 +13,11 @@ module RXDATA
     filenames = []
     info = ""
 
-    for script in scripts
+    scripts.each do |script|
       if script[1].empty?
         filename = "Untitled_#{script[0]}"
       else
-        filename = "#{script[1]}"
+        filename = script[1]
         filename += "_#{script[0]}" if filenames.include?(filename)
       end
       filenames.push(filename)
@@ -29,12 +28,12 @@ module RXDATA
         info += "\"#{script[1]}\" -> \"#{filename}\"\n"
       end
 
-      output = File.new(File.join(outdir, "#{filename}.rb"), "w+")
-      output.write(Zlib.inflate(script[2]).gsub("\n", ""))
+      output = File.new(File.join(outdir, "#{filename}.rb"), "wb")
+      output.write(Zlib.inflate(script[2]))
       output.close
     end
 
-    output = File.new(File.join(outdir, "info.txt"), "w+")
+    output = File.new(File.join(outdir, "info.txt"), "wb")
     output.write(info)
     output.close
 
@@ -64,7 +63,7 @@ module RXDATA
       scripts.push([
         index,
         info[0],
-        Zlib.deflate(input.read),
+        Zlib.deflate(input.read.force_encoding(Encoding::UTF_8)),
       ])
       input.close
     end
