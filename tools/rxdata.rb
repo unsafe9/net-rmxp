@@ -74,7 +74,3 @@ module RXDATA
   end
 
 end
-
-begin
-
-end

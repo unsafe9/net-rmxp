@@ -20,8 +20,12 @@ end
 
 task :test_play do
   Rake::Task[:compress_script].execute
-  pid = Process.spawn("Game.exe", :chdir=>"client")
-  Process.waitpid(pid)
+  Process.spawn("Game.exe", :chdir=>"client", :new_pgroup=>true)
+end
+
+task :open_project do
+  require_relative "tools/find_rmxp"
+  Process.spawn(find_rmxp, "Game.rxproj",  :chdir=>"client", :new_pgroup=>true)
 end
 
 task :install_githooks do
