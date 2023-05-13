@@ -84,6 +84,7 @@ begin
   case ARGV[0]
   when "compress"
     RXDATA.compress_script(script_dir, script_data)
+    puts "Compress done."
 
   when "extract"
     if Dir.exist? script_dir
@@ -91,7 +92,7 @@ begin
       return unless STDIN.gets.chomp.downcase == "y"
     end
     RXDATA.extract_script(script_dir, script_data)
-
+    puts "Extract done."
   end
 
 end
