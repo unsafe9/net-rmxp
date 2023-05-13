@@ -77,22 +77,5 @@ module RXDATA
 end
 
 begin
-  client_dir = File.join(File.dirname(__FILE__), "..", "client")
-  script_dir = File.join(client_dir, "Scripts")
-  script_data = File.join(client_dir, "Data", "Scripts.rxdata")
-
-  case ARGV[0]
-  when "compress"
-    RXDATA.compress_script(script_dir, script_data)
-    puts "Compress done."
-
-  when "extract"
-    if Dir.exist? script_dir
-      puts "The directory output already exists. You will lose all changes in the directory. Do you want to overwrite it? (y/n)"
-      return unless STDIN.gets.chomp.downcase == "y"
-    end
-    RXDATA.extract_script(script_dir, script_data)
-    puts "Extract done."
-  end
 
 end
