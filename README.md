@@ -1,6 +1,10 @@
 # net-rmxp
 Online multiplayer support for RPG Maker XP using Ruby-based server
 
+## Prerequisite
+- Latest stable version of Ruby
+- RPG Maker XP
+
 ## Client
 
 ### Usage
