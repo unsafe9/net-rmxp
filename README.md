@@ -1,6 +1,8 @@
 # net-rmxp
 Online multiplayer support for RPG Maker XP using Ruby-based server
 
+240530 - TODO : 이거 아까우니까 이어서 만들기 ㅠ
+
 ## Prerequisite
 - Latest stable version of Ruby
 - RPG Maker XP
